@@ -2,6 +2,7 @@ import './bootstrap';
 import '../css/app.css';
 
 import { createApp, h } from 'vue';
+import { createPinia } from 'pinia';
 import { useI18n } from './composables/useI18n';
 import { useDarkMode } from './composables/useDarkMode';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -21,7 +22,9 @@ createInertiaApp({
         setLanguage(localStorage.getItem('language') || 'en');
         initializeDarkMode();
 
+        const pinia = createPinia();
         const app = createApp({ render: () => h(App, props) })
+            .use(pinia)
             .use(plugin)
             .use(ZiggyVue);
 
